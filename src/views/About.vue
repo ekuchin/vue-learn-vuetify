@@ -39,11 +39,7 @@
         :rules="formValidation.weight"
       />
       <v-switch v-model="newCat.isAngry" label="Сердит"></v-switch>
-      <v-btn
-        type="submit"
-        class="primary"
-        @click="addCat(newCat)"
-        :disabled="!formIsValid"
+      <v-btn class="primary" @click="addCat(newCat)" :disabled="!formIsValid"
         >Добавить</v-btn
       >
 
@@ -57,7 +53,11 @@
         Принудительная валидация
       </v-btn>
 
-      
+      <v-switch
+        v-model="isDarkTheme"
+        label="Темная тема"
+        @change="changeTheme()"
+      ></v-switch>
     </v-form>
   </div>
 </template>
@@ -93,6 +93,7 @@ export default {
         ],
       },
       formIsValid: false,
+      isDarkTheme: false,
       cats: [
         { name: "Мурзик", breed: "Манул", weight: 10, isAngry: true },
         { name: "Рамзес", breed: "Сфинкс", weight: 2, isAngry: true },
@@ -123,6 +124,9 @@ export default {
     },
     forceValidation() {
       this.$refs.addForm.validate();
+    },
+    changeTheme() {
+      this.$vuetify.theme.dark = this.isDarkTheme;
     },
   },
 };
